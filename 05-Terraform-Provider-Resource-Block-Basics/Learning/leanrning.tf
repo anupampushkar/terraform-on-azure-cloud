@@ -37,4 +37,32 @@ resource "azurerm_resource_group" "myrg2" {
   
 }
 
+variable "Business_Division" {
+  description = "business division infra belong to"
+  type = string
+  default = "SAP"
+}
+variable "Environment" {
+  description = "Environment to describe what environment it is"
+  default = "Dev"
+}
+variable "resoruce_group_name" {
+  description = "this the resource group that will be used to create all the object"
+  default = "rg-default"
+}
+variable "resource_group_loation"{
+  description = "Location detal"
+  default = "eastus2"
+}
+
+locals {
+  owners = var.Business_Division
+  environment = var.Environment
+  resource_name_profix = "${var.Business_Division}- ${var.Environment}"
+  common_tag ={
+    owners = locals.owners
+    environment = locals.environment
+  }
+}
+
 
